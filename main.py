@@ -4,10 +4,14 @@ import random
 import string
 import requests as req
 
+import os
+numeros = os.environ.get('num')
+token = os.environ.get('tok')
+tuid = os.environ.get('tui')
+
 salt = "6cqshh5dhw73bzxn20oexa9k516chk7s"  # borrowed from https://github.com/thesadru/genshinstats
-uid = 12344  # int
-ltoken = "v2"  # str
-ltuid = "12345"  # str
+
+
 
 
 def calculate_ds():  # borrowed from https://github.com/thesadru/genshinstats
@@ -33,11 +37,11 @@ headers = {
 
 resp = req.get(
     'https://bbs-api-os.hoyoverse.com/game_record/genshin/api/dailyNote',
-    params=dict(server='os_usa', role_id=uid, schedule_type=1),
+    params=dict(server='os_usa', role_id=numeros, schedule_type=1),
     headers=headers,
     cookies={
-        'ltuid_v2': ltuid,
-        'ltoken_v2': ltoken
+        'ltuid_v2': tuid,
+        'ltoken_v2': token
     })
 
 print(resp.text)
